@@ -1,6 +1,13 @@
+[toc]
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+根据参考链接1：
+```
+npx create-react-app react-hooks-demo --template typescript
+```
 
 ## Available Scripts
 
@@ -44,3 +51,59 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 无eject配置less
+```
+npm install antd -S
+// npm install craco-antd，不需要下这个
+npm install @craco/craco craco-less babel-plugin-import -D
+```
+接下来创建`craco.config.js`，内容如下：
+```js
+const CracoLessPlugin = require('craco-less'); // 必须用 require 导入，实测 import 不行
+
+module.exports = {
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            modifyVars: { '@primary-color': '#1cacf4' },
+            javascriptEnabled: true
+          }
+        }
+      }
+    }
+  ]
+};
+```
+
+接着改`package.json`
+```json
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+```
+
+接着在`react-app-env.d.ts`里加上声明（避免报错）
+```ts
+declare module '*.less' {
+    const content: {[className: string]: string};
+    export default content;
+}
+```
+
+然后创建`Home.module.less`，最后在组件里：
+```ts
+import styles from './Home.module.less';
+className={styles.xxx}
+```
+
+注意：**不需要做其他特殊的配置**
+
+## 参考链接
+1. https://create-react-app.dev/docs/adding-typescript/
