@@ -8,20 +8,31 @@ import {
 import About from './About';
 import Home from './Home';
 import Login from './Login';
-import './App.less';
+import MyMenu from './layout/MyMenu';
+import BreadCrumb from './layout/BreadCrumb';
+import styles from './App.module.less';
 
 function App () {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Router>
-        <NavLink to="/home" className="link">Home</NavLink>
-        <NavLink to="/about" className="link">About</NavLink>
-        <NavLink to="/login" className="link">Login</NavLink>
-        <Routes>
-          <Route path="/home" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/login" element={<Login/>} />
-        </Routes>
+        <BreadCrumb />
+        <NavLink to="/" className="link"></NavLink>
+        <NavLink to="/home" className="link"></NavLink>
+        <NavLink to="/about" className="link"></NavLink>
+        <NavLink to="/login" className="link"></NavLink>
+
+        <div className={styles['app-body']}>
+          <MyMenu />
+          <div className={styles['main-content-wrapper']}>
+            <Routes>
+              <Route path="/" element={<Home/>} />
+              <Route path="/home" element={<Home/>} />
+              <Route path="/about" element={<About/>} />
+              <Route path="/login" element={<Login/>} />
+            </Routes>
+          </div>
+        </div>
       </Router>
     </div>
   );

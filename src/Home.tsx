@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Home.module.less';
-import {Button} from 'antd';
+import { Button } from 'antd';
 
-function Home (){
+function Home () {
   const [value, setValue] = useState(0);
   const add = () => {
     setValue(value + 1);
