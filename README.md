@@ -105,5 +105,20 @@ className={styles.xxx}
 
 注意：**不需要做其他特殊的配置**
 
+## 菜单栏、面包屑路由跟随
+监听路由变化，vue3用`watch`，react则用`useEffect`的第二个参数来实现。
+```js
+const location = useLocation()
+useEffect(() => {}, [location])
+```
+
+和vue3不同的是，面包屑需要用itemRender函数来自定义面包屑dom，因为链接需要直接取route.path，而非paths.join('/')。
+
+菜单栏可以用antd官网提供的getMenuItem函数来避免直接书写冗长的对象字面量。
+
+目前还是用在`App.tsx`里的`<NavLink>`来声明“有这么个链接”。
+
+暂时没法像vue-router那样用name来区分路由，所以`@/router/index.ts`全部改成了用path来区分路由。代码逻辑几乎没有修改。
+
 ## 参考链接
 1. https://create-react-app.dev/docs/adding-typescript/
