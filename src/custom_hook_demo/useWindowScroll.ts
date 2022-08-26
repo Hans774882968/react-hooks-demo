@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 interface Scroll {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
 const useWindowScroll = () => {

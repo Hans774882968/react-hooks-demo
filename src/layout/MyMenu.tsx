@@ -38,7 +38,8 @@ function MyMenu () {
     getMenuItem('站内', 'instation', <MailOutlined />),
     getMenuItem('demo合集', 'demos', <MailOutlined />, [
       getMenuItem(<NavLink to="/useWindowSizeDemo" className="link">实时获取窗口尺寸</NavLink>, '/useWindowSizeDemo'),
-      getMenuItem(<NavLink to="/useWindowScrollDemo" className="link">实时获取滚动offset</NavLink>, '/useWindowScrollDemo')
+      getMenuItem(<NavLink to="/useWindowScrollDemo" className="link">实时获取滚动offset</NavLink>, '/useWindowScrollDemo'),
+      getMenuItem(<NavLink to="/useLocalStorageDemo" className="link">自动同步信息到localStorage的自定义hook</NavLink>, '/useLocalStorageDemo')
     ])
   ];
   const openKeys = ['index', 'system', 'order', 'instation', 'demos'];

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 interface WindowSize {
-    width: number;
-    height: number;
+  width: number;
+  height: number;
 }
 
 const useWindowSize = () => {

@@ -120,5 +120,17 @@ useEffect(() => {}, [location])
 
 暂时没法像vue-router那样用name来区分路由，所以`@/router/index.ts`全部改成了用path来区分路由。代码逻辑几乎没有修改。
 
+## 自定义hook示例
+根据参考链接2，要求每次修改数据都需要对另外一些对象做出同步操作，这种场景都能用“自定义hook”。看上去最有用的例子，自然是`useLocalStorage`了。
+
+示例的测试分两个方面：
+1. 点击按钮后`localStorage`正确变化。
+2. 刷新后`localStorage`值回到初始值。
+
+问题：`localStorage.setItem`是同步的且线程不安全，导致我们不能立刻读到新的值。
+
+目前是用`await`随便处理一下，自测看上去没问题但感觉非常不对。
+
 ## 参考链接
 1. https://create-react-app.dev/docs/adding-typescript/
+2. 自定义hook示例：https://juejin.cn/post/7112379023761604616
