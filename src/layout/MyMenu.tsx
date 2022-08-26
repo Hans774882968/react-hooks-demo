@@ -35,21 +35,26 @@ function MyMenu () {
       getMenuItem(<NavLink to="/login" className="link">登录</NavLink>, '/login')
     ]),
     getMenuItem('订单', 'order', <MailOutlined />),
-    getMenuItem('站内', 'instation', <MailOutlined />)
+    getMenuItem('站内', 'instation', <MailOutlined />),
+    getMenuItem('demo合集', 'demos', <MailOutlined />, [
+      getMenuItem(<NavLink to="/useWindowSizeDemo" className="link">实时获取窗口尺寸</NavLink>, '/useWindowSizeDemo'),
+      getMenuItem(<NavLink to="/useWindowScrollDemo" className="link">实时获取滚动offset</NavLink>, '/useWindowScrollDemo')
+    ])
   ];
-  const openKeys = ['index', 'system', 'order', 'instation'];
+  const openKeys = ['index', 'system', 'order', 'instation', 'demos'];
   const [selectKeys, setSelectedKeys] = useState(['login']);
 
   useEffect(() => {
     setSelectedKeys([location.pathname]);
   }, [location]);
 
+  // 只需要设置 defaultOpenKeys 而非 openKeys ，即可让子菜单可收回
   return (
     <Menu
       style={{ width: 350 }}
       theme='dark'
       mode='inline'
-      openKeys={openKeys}
+      defaultOpenKeys={openKeys}
       selectedKeys={selectKeys}
       items={items}
     />

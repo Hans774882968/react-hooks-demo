@@ -1,20 +1,16 @@
+import React from 'react';
 import { AntdBreadcrumbType } from '../utils/breadcrumb';
-
-interface MyRouteMeta {
-  title: string;
-  navList: string[];
-}
-
-interface RouteRecord {
-  path: string;
-  name: string;
-  meta?: MyRouteMeta;
-}
+import demos from './demos';
+import About from '../About';
+import Home from '../Home';
+import Login from '../Login';
+import { MyRouteMeta, RouteRecord } from './types';
 
 export const routes = [
   {
     path: '/',
     name: 'index',
+    element: <Home/>,
     meta: {
       title: 'index'
     }
@@ -22,6 +18,7 @@ export const routes = [
   {
     path: '/home',
     name: 'home',
+    element: <Home/>,
     meta: {
       title: 'Home',
       navList: ['/']
@@ -30,6 +27,7 @@ export const routes = [
   {
     path: '/about',
     name: 'about',
+    element: <About/>,
     meta: {
       title: 'About',
       navList: ['/']
@@ -38,11 +36,13 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
+    element: <Login/>,
     meta: {
       title: 'Login',
       navList: ['/']
     }
-  }
+  },
+  ...demos
 ] as RouteRecord[];
 
 export function getPath2route (routes: RouteRecord[]):
