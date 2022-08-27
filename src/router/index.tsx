@@ -6,10 +6,11 @@ import Home from '../Home';
 import Login from '../Login';
 import { MyRouteMeta, RouteRecord } from './types';
 
-export const routes = [
+export const routes: RouteRecord[] = [
   {
     path: '/',
     name: 'index',
+    menuName: '首页',
     element: <Home/>,
     meta: {
       title: 'index'
@@ -18,6 +19,7 @@ export const routes = [
   {
     path: '/home',
     name: 'home',
+    menuName: 'Home',
     element: <Home/>,
     meta: {
       title: 'Home',
@@ -27,6 +29,7 @@ export const routes = [
   {
     path: '/about',
     name: 'about',
+    menuName: 'about',
     element: <About/>,
     meta: {
       title: 'About',
@@ -36,6 +39,7 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
+    menuName: '登录',
     element: <Login/>,
     meta: {
       title: 'Login',
@@ -43,7 +47,7 @@ export const routes = [
     }
   },
   ...demos
-] as RouteRecord[];
+];
 
 export function getPath2route (routes: RouteRecord[]):
   Map<string, RouteRecord> {

@@ -131,6 +131,36 @@ useEffect(() => {}, [location])
 
 目前是用`await`随便处理一下，自测看上去没问题但感觉非常不对。
 
+## 为什么useEffect要返回一个清理函数（React Hooks的闭包陷阱）
+根据参考链接3：
+1. 假如`useEffect`忘记加对应变量的依赖，则不会重新执行`useEffect`的callback，事件监听器还是原来的，所以就会访问旧值的闭包（现有的事件监听器只能访问旧值的闭包）。加上依赖以后事件监听器才会变，才能访问新值。
+2. 但是原有的事件监听器是不会自己消失的。所以我们的`useEffect`要返回一个callback，让框架帮我们把旧的事件监听器去掉，再产生新的。
+
+## Todo List
+经过思考，把改变父组件状态的函数传给子组件来调用，是最佳方案。
+
+我们删除待办事项前想弹出确认框，有这样一段代码：
+
+```typescript
+try {
+  await new Promise<void>((resolve, reject) => Modal.confirm({
+    title: `确认删除待办事项"${todos[index].text}"嘛QAQ`,
+    icon: <ExclamationCircleOutlined />,
+    content: '',
+    okText: '残忍删除',
+    okType: 'danger',
+    cancelText: '我再想想',
+    onOk: () => resolve(),
+    onCancel: () => reject()
+  }));
+} catch (e) {
+  return;
+}
+```
+
+如果不提供`onCancel`参数，我们在Chrome中用`queryObjects(Promise)`查看页面所有的`Promise`状态，会发现`pending`的`Promise`越来越多。因此我们需要用这种比较麻烦的写法。
+
 ## 参考链接
 1. https://create-react-app.dev/docs/adding-typescript/
 2. 自定义hook示例：https://juejin.cn/post/7112379023761604616
+3. React Hooks的闭包陷阱：https://juejin.cn/post/7093699777556119565

@@ -1,0 +1,25 @@
+.todo {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .todo-item {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+      // 按钮高度32px，这里设置 line-height 和高度一致
+      line-height: 32px;
+    }
+  }
+
+  .todo-form {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+  }
+}

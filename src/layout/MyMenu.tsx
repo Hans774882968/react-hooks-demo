@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import { NavLink, useLocation } from 'react-router-dom';
+import demos from '../router/demos';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -36,11 +37,12 @@ function MyMenu () {
     ]),
     getMenuItem('订单', 'order', <MailOutlined />),
     getMenuItem('站内', 'instation', <MailOutlined />),
-    getMenuItem('demo合集', 'demos', <MailOutlined />, [
-      getMenuItem(<NavLink to="/useWindowSizeDemo" className="link">实时获取窗口尺寸</NavLink>, '/useWindowSizeDemo'),
-      getMenuItem(<NavLink to="/useWindowScrollDemo" className="link">实时获取滚动offset</NavLink>, '/useWindowScrollDemo'),
-      getMenuItem(<NavLink to="/useLocalStorageDemo" className="link">自动同步信息到localStorage的自定义hook</NavLink>, '/useLocalStorageDemo')
-    ])
+    getMenuItem('demo合集', 'demos', <MailOutlined />, demos.map(route => {
+      return getMenuItem(
+        <NavLink to={route.path} className="link">{route.menuName}</NavLink>,
+        route.path
+      );
+    }))
   ];
   const openKeys = ['index', 'system', 'order', 'instation', 'demos'];
   const [selectKeys, setSelectedKeys] = useState(['login']);
