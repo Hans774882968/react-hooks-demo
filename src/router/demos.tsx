@@ -4,6 +4,8 @@ import UseWindowScrollDemo from '../custom_hook_demo/UseWindowScrollDemo';
 import UseLocalStorageDemo from '../custom_hook_demo/UseLocalStorageDemo';
 import TodoList from '../TodoList';
 import { RouteRecord } from './types';
+import UseStateDemo from '../react_hooks_basic/useStateDemo';
+import UseContextDemo from '../react_hooks_basic/useContextDemo';
 
 const demos: RouteRecord[] = [
   {
@@ -43,6 +45,26 @@ const demos: RouteRecord[] = [
     element: <TodoList/>,
     meta: {
       title: 'TODO List',
+      navList: ['/']
+    }
+  },
+  {
+    path: '/useStateDemo',
+    name: 'useStateDemo',
+    menuName: 'Use State Demo',
+    element: <UseStateDemo/>,
+    meta: {
+      title: 'Use State Demo',
+      navList: ['/']
+    }
+  },
+  {
+    path: '/useContextDemo',
+    name: 'useContextDemo',
+    menuName: 'Use Context Demo',
+    element: <UseContextDemo/>,
+    meta: {
+      title: 'Use Context Demo',
       navList: ['/']
     }
   }
