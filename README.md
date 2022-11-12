@@ -213,7 +213,7 @@ export default function UseStateDemo () {
 ## useContext
 基本模型：祖先组件`const C = createContext()`，`<C.Provider value={val}>调用子组件</C.Provider>`，子组件`const val = useContext(C)`。
 
-下面是一个子组件修改祖先组件状态的例子。做法是：把`setVal`一起传下去。
+下面是一个子组件修改祖先组件状态的例子。做法是：把`n, setN()`一起传下去。
 
 ```tsx
 import { Button } from 'antd';

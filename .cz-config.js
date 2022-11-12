@@ -1,30 +1,30 @@
 module.exports = {
   types: [
-    { value: 'feat', name: 'feat:     A new feature' },
-    { value: 'fix', name: 'fix:      A bug fix' },
-    { value: 'docs', name: 'docs:     Documentation only changes' },
+    { value: 'feat', name: 'feat:     一个新特性（A new feature）' },
+    { value: 'fix', name: 'fix:      修复一个bug（A bug fix）' },
+    { value: 'docs', name: 'docs:     变更的只有文档（Documentation only changes）' },
     {
       value: 'style',
       name:
-        'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
+        'style:    不改变代码含义的代码样式变化 Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
     },
     {
       value: 'refactor',
       name:
-        'refactor: A code change that neither fixes a bug nor adds a feature',
+        'refactor: 代码重构，注意和特性、bug修复区分开来 A code change that neither fixes a bug nor adds a feature',
     },
     {
       value: 'perf',
-      name: 'perf:     A code change that improves performance',
+      name: 'perf:     提升性能（A code change that improves performance）',
     },
-    { value: 'test', name: 'test:     Adding missing tests' },
+    { value: 'test', name: 'test:     添加测试（Adding missing tests）' },
     {
       value: 'chore',
       name:
-        'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation',
+        'chore:    构建、脚手架工具等开发工具变动（Changes to the build process or auxiliary tools\n            and libraries such as documentation generation）',
     },
-    { value: 'revert', name: 'revert:   Revert to a commit' },
-    { value: 'WIP', name: 'WIP:      Work in progress' },
+    { value: 'revert', name: 'revert:   代码回滚（Revert to a commit）' },
+    { value: 'WIP', name: 'WIP:      工作进行中（Work in progress）' },
   ],
 
   scopes: [{ name: 'Outbound' }, { name: 'Inbound' }, { name: 'Basic' }, { name: 'e2eTest' }, { name: 'unitTest' }],
