@@ -141,6 +141,10 @@ useEffect(() => {}, [location])
 
 如果state修改的值和现有的值一致，则不会触发组件的更新。
 
+根据参考链接5，`useState`不仅可以传入变量，还可以传入一个函数，这个函数只会在第一次渲染时执行一次，其返回值为初值。如果初始值的获取需要经过复杂的逻辑，则可以考虑这个用法。
+
+`setValue`也可以传入一个函数，其参数为上一次的值，返回值为要更新成的值。什么时候必须使用这个特性呢？在一次渲染中需要多次修改值的时候。以上面简单的计数器demo为例，短时间内连续调用2次`setValue(value + 1)`并不能得到期望的`value`加2的效果。为了避免该问题，第二次`setValue`必须改为`setValue(value => value + 1)`。这一部分内容和React的渲染机制有关，React会收集这些改动，在一个渲染周期进行改动，如果触发了React组件的重新渲染，则会将函数重新执行一次。如果函数没有重新执行，则`const [value, setValue] = useState(0);`的`value`并不会改变。获取`value`改变后的值，实际上需要依靠闭包实现，更具体的机制要放在《React源码浅析》中讲述了。
+
 ```tsx
 export default function UseStateDemo () {
   const [state, setState] = useState(() => {
@@ -211,6 +215,8 @@ export default function UseStateDemo () {
 看不懂……
 
 ## useContext
+`useContext`是组件通信的一个解决方案。
+
 基本模型：祖先组件`const C = createContext()`，`<C.Provider value={val}>调用子组件</C.Provider>`，子组件`const val = useContext(C)`。
 
 下面是一个子组件修改祖先组件状态的例子。做法是：把`n, setN()`一起传下去。
@@ -219,7 +225,7 @@ export default function UseStateDemo () {
 import { Button } from 'antd';
 import React, { createContext, useContext, useState } from 'react';
 
-function SubComponentChangeParentState () {
+export default function SubComponentChangeParentState () {
   const C = createContext<{n: number, setN: (n: number) => any}>({
     n: 0, setN: (n: number) => n
   });
@@ -249,7 +255,7 @@ function SubComponentChangeParentState () {
 }
 ```
 
-不过`createContext`需要提供初值就挺麻烦的，这就导致我们`createContext`不得不使用泛型。
+不过在这个例子中，`createContext`需要提供初值就挺麻烦的，这就导致我们`createContext`不得不使用泛型。
 
 ## 为什么useEffect要返回一个清理函数（React Hooks的闭包陷阱）
 根据参考链接3：
